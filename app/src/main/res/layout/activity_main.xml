@@ -11,9 +11,9 @@
     tools:context="com.android.image.picker.MainActivity"
     >
 
-  <TextView
-      android:layout_width="wrap_content"
+  <Button
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Hello World!"
-      />
+      android:id="@+id/btn_image_picker"
+      android:text="图片选择"/>
 </RelativeLayout>
