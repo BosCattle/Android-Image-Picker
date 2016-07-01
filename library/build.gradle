@@ -1,4 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+  userOrg = 'kevinbas'
+  groupId = 'com.kevinbas'
+  artifactId = 'android-image-picker'
+  publishVersion = '0.0.1'
+  desc = 'A library for utils.'
+  website = 'https://github.com/BosCattle/Android-Image-Picker'
+}
 
 android {
   compileSdkVersion 24
@@ -15,6 +25,9 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
+  lintOptions {
+    abortOnError false
   }
 }
 
