@@ -31,7 +31,7 @@ public class ImagePickerActivity extends AppCompatActivity implements LoaderMana
     mToolbar = (Toolbar) findViewById(R.id.toolbar);
     mRecyclerView = (RecyclerView) findViewById(R.id.ui_image_recycler);
     mToolbar.setTitle(getResources().getString(R.string.label_toolbar));
-    mToolbar.setNavigationIcon(android.R.drawable.ic_menu_crop);
+    mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
   }
 
   /**
