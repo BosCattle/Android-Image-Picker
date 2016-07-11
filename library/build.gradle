@@ -6,7 +6,7 @@ publish {
   userOrg = 'kevinbas'
   groupId = 'com.kevinbas'
   artifactId = 'android-image-picker'
-  publishVersion = '0.0.1'
+  publishVersion = '0.0.2'
   desc = 'A library for utils.'
   website = 'https://github.com/BosCattle/Android-Image-Picker'
 }
