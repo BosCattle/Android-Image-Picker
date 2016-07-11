@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
@@ -52,5 +54,26 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
     Uri mUri;
     mUri = MediaUtils.getPhotoUri(mCursor);
     Glide.with(mContext).load(mUri).centerCrop().crossFade().into(viewHolder.mImageView);
+    viewHolder.mAppCompatCheckBox.setOnClickListener(view -> {
+      if (viewHolder.mAppCompatCheckBox.isChecked()) {
+        viewHolder.mAppCompatCheckBox.setChecked(false);
+        viewHolder.mAppCompatCheckBox.setVisibility(View.GONE);
+      } else {
+        viewHolder.mAppCompatCheckBox.setChecked(true);
+        viewHolder.mAppCompatCheckBox.setVisibility(View.VISIBLE);
+      }
+    });
+    viewHolder.mImageView.setOnTouchListener((view, event) -> {
+      if (MotionEvent.ACTION_DOWN == event.getAction()) {
+        if (viewHolder.mAppCompatCheckBox.isChecked()) {
+          viewHolder.mAppCompatCheckBox.setChecked(false);
+          viewHolder.mAppCompatCheckBox.setVisibility(View.GONE);
+        } else {
+          viewHolder.mAppCompatCheckBox.setChecked(true);
+          viewHolder.mAppCompatCheckBox.setVisibility(View.VISIBLE);
+        }
+      }
+      return true;
+    });
   }
 }

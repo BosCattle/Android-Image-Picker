@@ -2,7 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
   <ImageView
@@ -10,12 +9,12 @@
       android:layout_height="wrap_content"
       android:id="@+id/ui_view_item_iv"/>
 
-  <android.support.v7.widget.AppCompatCheckBox
+  <picker.image.android.com.library.view.MaterialCheckBox
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:id="@+id/ui_view_item_acb"
       android:layout_gravity="top|right"
-      app:theme="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
+      android:visibility="invisible"
       />
 
 </FrameLayout>

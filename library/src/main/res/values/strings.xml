@@ -1,4 +1,6 @@
 <resources>
   <string name="app_name">Library</string>
   <string name="label_toolbar">相册</string>
+  <string name="float_bottom_compression">压缩</string>
+  <string name="float_bottom_crop">裁剪</string>
 </resources>

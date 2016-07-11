@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import picker.image.android.com.library.R;
+import picker.image.android.com.library.callback.ItemTouchListener;
 import picker.image.android.com.library.option.ImageOption;
 import picker.image.android.com.library.option.MediaUtils;
 
@@ -20,7 +21,7 @@ import picker.image.android.com.library.option.MediaUtils;
  * picker image by kevin
  */
 public class ImagePickerActivity extends AppCompatActivity
-    implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
+    implements android.app.LoaderManager.LoaderCallbacks<Cursor>,ItemTouchListener {
 
   public static final int CONSTANT_REQUEST_CODE = 100;
   private static final String LOADER_EXTRA_URI = "loader_extra_uri";
@@ -91,13 +92,17 @@ public class ImagePickerActivity extends AppCompatActivity
     mRecyclerView.setHasFixedSize(true);
     mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
     int spanCount = 3; // 3 columns
-    int spacing = 10; // 50px
+    int spacing = 4; // 50px
     boolean includeEdge = true;
     mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
     mRecyclerView.setAdapter(imagePickerAdapter);
   }
 
   @Override public void onLoaderReset(android.content.Loader<Cursor> loader) {
+
+  }
+
+  @Override public void bindOnTouchListener(int position) {
 
   }
 }

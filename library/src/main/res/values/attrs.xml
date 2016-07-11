@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="CheckBox_Sample">
+    <attr format="dimension" name="size"/>
+    <attr format="color" name="color_border"/>
+    <attr format="color" name="color_background"/>
+  </declare-styleable>
+</resources>
