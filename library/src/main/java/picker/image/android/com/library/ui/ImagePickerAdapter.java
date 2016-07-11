@@ -3,10 +3,10 @@ package picker.image.android.com.library.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import com.bumptech.glide.Glide;
 import java.util.List;
 import picker.image.android.com.library.R;
 import picker.image.android.com.library.option.MediaItem;
@@ -51,6 +51,6 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
   @Override public void onBindViewHolder(ImagePickerViewHolder viewHolder, Cursor cursor) {
     Uri mUri;
     mUri = MediaUtils.getPhotoUri(mCursor);
-    viewHolder.mImageView.setImageURI(mUri);
+    Glide.with(mContext).load(mUri).centerCrop().crossFade().into(viewHolder.mImageView);
   }
 }

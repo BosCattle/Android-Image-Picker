@@ -89,7 +89,11 @@ public class ImagePickerActivity extends AppCompatActivity
   @Override public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
     ImagePickerAdapter imagePickerAdapter = new ImagePickerAdapter(ImagePickerActivity.this,cursor,null,0,null);
     mRecyclerView.setHasFixedSize(true);
-    mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+    mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+    int spanCount = 3; // 3 columns
+    int spacing = 10; // 50px
+    boolean includeEdge = true;
+    mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
     mRecyclerView.setAdapter(imagePickerAdapter);
   }
 
