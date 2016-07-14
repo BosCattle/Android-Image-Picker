@@ -1,4 +1,4 @@
-package picker.image.android.com.library.ui;
+package picker.image.android.com.library.utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

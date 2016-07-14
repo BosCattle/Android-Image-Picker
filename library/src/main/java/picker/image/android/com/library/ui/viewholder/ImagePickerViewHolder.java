@@ -1,4 +1,4 @@
-package picker.image.android.com.library.ui;
+package picker.image.android.com.library.ui.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

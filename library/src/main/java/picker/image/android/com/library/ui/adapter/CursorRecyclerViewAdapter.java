@@ -1,4 +1,4 @@
-package picker.image.android.com.library.ui;
+package picker.image.android.com.library.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;

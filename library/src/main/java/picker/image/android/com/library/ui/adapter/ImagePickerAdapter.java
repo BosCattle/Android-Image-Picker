@@ -1,17 +1,13 @@
-package picker.image.android.com.library.ui;
+package picker.image.android.com.library.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v4.os.TraceCompat;
-import android.support.v7.util.AsyncListUtil;
-import android.util.MutableInt;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
@@ -20,7 +16,7 @@ import picker.image.android.com.library.R;
 import picker.image.android.com.library.option.MediaItem;
 import picker.image.android.com.library.option.MediaOptions;
 import picker.image.android.com.library.option.MediaUtils;
-import picker.image.android.com.library.utils.ScreenUtils;
+import picker.image.android.com.library.ui.viewholder.ImagePickerViewHolder;
 
 /**
  * Created by Kevin on 2016/7/6.
@@ -31,6 +27,27 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
   private List<MediaItem> mMediaListSelected;
   public Context mContext;
   public Cursor mCursor;
+  private GestureDetector mGestureDetector = new GestureDetector(mContext,new GestureDetector.SimpleOnGestureListener(){
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
+      //SingleTap
+      Toast.makeText(mContext,"单击",Toast.LENGTH_SHORT).show();
+      return super.onSingleTapConfirmed(e);
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent e) {
+      //DoubleTap
+      Toast.makeText(mContext,"双击",Toast.LENGTH_SHORT).show();
+      return super.onDoubleTap(e);
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent e) {
+      Toast.makeText(mContext,"双击",Toast.LENGTH_SHORT).show();
+      return super.onDoubleTapEvent(e);
+    }
+  });
 
   public ImagePickerAdapter(Context context, Cursor c, MediaOptions mediaOptions, int mMediaType) {
     this(context, c, null, mediaOptions);
@@ -71,7 +88,8 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
         }
       }
     } else {
-      viewHolder.mAppCompatCheckBox.setOnClickListener(view -> {
+      viewHolder.mAppCompatCheckBox.setOnClickListener(view ->
+      {
         if (viewHolder.mAppCompatCheckBox.isChecked()) {
           viewHolder.mAppCompatCheckBox.setChecked(false);
           viewHolder.mAppCompatCheckBox.setVisibility(View.GONE);
@@ -88,26 +106,7 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
           }
         }
       });
-      viewHolder.mImageView.setOnTouchListener((view, event) -> {
-        if (MotionEvent.ACTION_DOWN == event.getAction()) {
-          if (viewHolder.mAppCompatCheckBox.isChecked()) {
-            viewHolder.mAppCompatCheckBox.setChecked(false);
-            viewHolder.mAppCompatCheckBox.setVisibility(View.GONE);
-            removeMediaItem(mUri);
-          } else {
-            if (mMediaOptions.canSelectMultiPhoto()
-                && mMediaOptions.getImageSize() > mMediaListSelected.size()) {
-              viewHolder.mAppCompatCheckBox.setChecked(true);
-              viewHolder.mAppCompatCheckBox.setVisibility(View.VISIBLE);
-              addMediaItem(mUri);
-            } else {
-              Toast.makeText(mContext, "图片总数不能大于" + mMediaOptions.getImageSize(),
-                  Toast.LENGTH_SHORT).show();
-            }
-          }
-        }
-        return false;
-      });
+      viewHolder.mImageView.setOnTouchListener((view, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
     }
   }
 
