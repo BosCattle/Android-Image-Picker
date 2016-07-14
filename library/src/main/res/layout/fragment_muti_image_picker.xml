@@ -1,0 +1,65 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+  <android.support.design.widget.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/muti_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        />
+
+  </android.support.design.widget.AppBarLayout>
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="?attr/actionBarSize"
+      >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ui_muti_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/ui_menu_labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        fab:menu_labels_ellipsize="start"
+        fab:menu_labels_position="left"
+        fab:menu_labels_singleLine="true"
+        tools:ignore="RtlHardcoded"
+        >
+
+      <com.github.clans.fab.FloatingActionButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_thumbnails"
+          fab:fab_label="@string/float_bottom_compression"
+          fab:fab_size="mini"
+          />
+
+      <com.github.clans.fab.FloatingActionButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_crop"
+          fab:fab_label="@string/float_bottom_crop"
+          fab:fab_size="mini"
+          />
+
+    </com.github.clans.fab.FloatingActionMenu>
+  </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

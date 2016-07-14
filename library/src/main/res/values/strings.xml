@@ -3,4 +3,7 @@
   <string name="label_toolbar">相册</string>
   <string name="float_bottom_compression">压缩</string>
   <string name="float_bottom_crop">裁剪</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -9,15 +9,10 @@ import java.util.List;
 /**
  * kevin
  */
-// TODO: 4/12/2016 添加imageSize
 public class MediaOptions implements Parcelable {
   private boolean canSelectMultiPhoto;
-  private boolean canSelectMultiVideo;
   private boolean isCropped;
-  private int maxVideoDuration;
-  private int minVideoDuration;
   private boolean canSelectPhoto;
-  private boolean canSelectVideo;
   private File photoCaptureFile;
   private int aspectX;
   private int aspectY;
@@ -59,39 +54,14 @@ public class MediaOptions implements Parcelable {
     return canSelectMultiPhoto;
   }
 
-  public boolean canSelectMultiVideo() {
-    return canSelectMultiVideo;
-  }
-
   public boolean isCropped() {
     return isCropped;
-  }
-
-  /**
-   * @return in milliseconds.
-   */
-  public int getMaxVideoDuration() {
-    return maxVideoDuration;
-  }
-
-  /**
-   * @return in milliseconds.
-   */
-  public int getMinVideoDuration() {
-    return minVideoDuration;
-  }
-
-  public boolean canSelectPhotoAndVideo() {
-    return canSelectPhoto && canSelectVideo;
   }
 
   public boolean canSelectPhoto() {
     return canSelectPhoto;
   }
 
-  public boolean canSelectVideo() {
-    return canSelectVideo;
-  }
 
   public File getPhotoFile() {
     return photoCaptureFile;
@@ -99,12 +69,8 @@ public class MediaOptions implements Parcelable {
 
   private MediaOptions(Builder builder) {
     this.canSelectMultiPhoto = builder.canSelectMultiPhoto;
-    this.canSelectMultiVideo = builder.canSelectMultiVideo;
     this.isCropped = builder.isCropped;
-    this.maxVideoDuration = builder.maxVideoDuration;
-    this.minVideoDuration = builder.minVideoDuration;
     this.canSelectPhoto = builder.canSelectPhoto;
-    this.canSelectVideo = builder.canSelectVideo;
     this.photoCaptureFile = builder.photoFile;
     this.aspectX = builder.aspectX;
     this.aspectY = builder.aspectY;
@@ -116,12 +82,8 @@ public class MediaOptions implements Parcelable {
   }
 
   /**
-   * Create default {@link MediaOptions} object.
-   * <p/>
-   * With options:
-   * <ul>
-   * <li>Only select 1 photo and not crop.</li>
-   * </ul>
+   *
+   * @return Create a default object {@link MediaOptions}
    */
   public static MediaOptions createDefault() {
     return new Builder().build();
@@ -132,12 +94,8 @@ public class MediaOptions implements Parcelable {
    */
   public static class Builder {
     private boolean canSelectMultiPhoto = false;
-    private boolean canSelectMultiVideo = false;
     private boolean isCropped = false;
-    private int maxVideoDuration = Integer.MAX_VALUE;
-    private int minVideoDuration = 0;
     private boolean canSelectPhoto = true;
-    private boolean canSelectVideo = false;
     private File photoFile;
     private int aspectX = 1;
     private int aspectY = 1;
@@ -148,19 +106,6 @@ public class MediaOptions implements Parcelable {
     private boolean showWarningBeforeRecord = false;
 
     public Builder() {
-    }
-
-    /**
-     * Should set this option = true when support multi devices and OS
-     * version and set {@link #setMaxVideoDuration(int)} options. (HTC
-     * devices usually can not limit video's duration when record, should
-     * show message warning before record)
-     *
-     * @param showWarningBeforeRecord Default is false.
-     */
-    public Builder setShowWarningBeforeRecordVideo(boolean showWarningBeforeRecord) {
-      this.showWarningBeforeRecord = showWarningBeforeRecord;
-      return this;
     }
 
     /**
@@ -225,68 +170,10 @@ public class MediaOptions implements Parcelable {
     }
 
     /**
-     * Select multiple videos. If true, videos haven't check duration. It's
-     * override {@link #setMaxVideoDuration(int)} and
-     * {@link #setMinVideoDuration(int)}
-     */
-    public Builder canSelectMultiVideo(boolean canSelectMulti) {
-      this.canSelectMultiVideo = canSelectMulti;
-      if (canSelectMultiVideo) {
-        maxVideoDuration = Integer.MAX_VALUE;
-        minVideoDuration = 0;
-      }
-      return this;
-    }
-
-    /**
-     * Set max video's duration. If set, can't select multiple videos. It's
-     * override {@link #canSelectMultiVideo(boolean)} option.
-     *
-     * @param maxDuration in milliseconds.
-     * @throws IllegalArgumentException if maxDuration <=0
-     * @see #setMinVideoDuration(int)
-     */
-    public Builder setMaxVideoDuration(int maxDuration) {
-      if (maxDuration <= 0) {
-        throw new IllegalArgumentException("Max duration must be > 0");
-      }
-      this.maxVideoDuration = maxDuration;
-      this.canSelectMultiVideo = false;
-      return this;
-    }
-
-    /**
-     * Set min video's duration. If set, can't select multi videos. It's
-     * override {@link #canSelectMultiVideo(boolean)} option.
-     *
-     * @param minDuration in milliseconds.
-     * @throws IllegalArgumentException if minDuration <=0
-     * @see #setMaxVideoDuration(int)
-     */
-    public Builder setMinVideoDuration(int minDuration) {
-      if (minDuration <= 0) {
-        throw new IllegalArgumentException("Min duration must be > 0");
-      }
-      this.minVideoDuration = minDuration;
-      this.canSelectMultiVideo = false;
-      return this;
-    }
-
-    /**
-     * Can choose photo or video. Default only choose photo.
-     */
-    public Builder canSelectBothPhotoVideo() {
-      canSelectPhoto = true;
-      canSelectVideo = true;
-      return this;
-    }
-
-    /**
      * Only choose video. This method override {@link #selectPhoto()} if set
      * before. Default only choose photo.
      */
     public Builder selectVideo() {
-      canSelectVideo = true;
       canSelectPhoto = false;
       return this;
     }
@@ -297,7 +184,6 @@ public class MediaOptions implements Parcelable {
      */
     public Builder selectPhoto() {
       canSelectPhoto = true;
-      canSelectVideo = false;
       return this;
     }
 
@@ -325,14 +211,10 @@ public class MediaOptions implements Parcelable {
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(canSelectMultiPhoto ? 1 : 0);
-    dest.writeInt(canSelectMultiVideo ? 1 : 0);
     dest.writeInt(canSelectPhoto ? 1 : 0);
-    dest.writeInt(canSelectVideo ? 1 : 0);
     dest.writeInt(isCropped ? 1 : 0);
     dest.writeInt(fixAspectRatio ? 1 : 0);
     dest.writeInt(showWarningVideoDuration ? 1 : 0);
-    dest.writeInt(this.maxVideoDuration);
-    dest.writeInt(this.minVideoDuration);
     dest.writeInt(aspectX);
     dest.writeInt(aspectY);
     dest.writeSerializable(photoCaptureFile);
@@ -343,14 +225,10 @@ public class MediaOptions implements Parcelable {
 
   public MediaOptions(Parcel in) {
     canSelectMultiPhoto = in.readInt() != 0;
-    canSelectMultiVideo = in.readInt() != 0;
     canSelectPhoto = in.readInt() != 0;
-    canSelectVideo = in.readInt() != 0;
     isCropped = in.readInt() != 0;
     fixAspectRatio = in.readInt() != 0;
     showWarningVideoDuration = in.readInt() != 0;
-    this.maxVideoDuration = in.readInt();
-    this.minVideoDuration = in.readInt();
     aspectX = in.readInt();
     aspectY = in.readInt();
     this.photoCaptureFile = (File) in.readSerializable();
@@ -375,10 +253,7 @@ public class MediaOptions implements Parcelable {
     int result = 1;
     result = prime * result + (canSelectMultiPhoto ? 1231 : 1237);
     result = prime * result + (canSelectPhoto ? 1231 : 1237);
-    result = prime * result + (canSelectVideo ? 1231 : 1237);
     result = prime * result + (isCropped ? 1231 : 1237);
-    result = prime * result + maxVideoDuration;
-    result = prime * result + minVideoDuration;
     return result;
   }
 
@@ -389,10 +264,7 @@ public class MediaOptions implements Parcelable {
     MediaOptions other = (MediaOptions) obj;
     if (canSelectMultiPhoto != other.canSelectMultiPhoto) return false;
     if (canSelectPhoto != other.canSelectPhoto) return false;
-    if (canSelectVideo != other.canSelectVideo) return false;
     if (isCropped != other.isCropped) return false;
-    if (maxVideoDuration != other.maxVideoDuration) return false;
-    if (minVideoDuration != other.minVideoDuration) return false;
     return true;
   }
 }

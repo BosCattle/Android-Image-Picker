@@ -13,13 +13,12 @@ import android.text.TextUtils;
 
 public class MediaItem implements Parcelable {
   public static final int PHOTO = 1;
-  public static final int VIDEO = 2;
   private int type;
   private Uri uriCropped;
   private Uri uriOrigin;
 
   /**
-   * @param mediaType Whether {@link #PHOTO} or {@link #VIDEO}
+   * @param mediaType Whether {@link #PHOTO}.
    * @param uriOrigin {@link Uri} of media item.
    */
   public MediaItem(int mediaType, Uri uriOrigin) {
@@ -28,7 +27,7 @@ public class MediaItem implements Parcelable {
   }
 
   /**
-   * @return type of media item. Whether {@link #PHOTO} or {@link #VIDEO}
+   * @return type of media item. Whether {@link #PHOTO}.
    */
   public int getType() {
     return type;
@@ -37,7 +36,7 @@ public class MediaItem implements Parcelable {
   /**
    * Set type of media.
    *
-   * @param type is {@link #PHOTO} or {@link #VIDEO}
+   * @param type is {@link #PHOTO}.
    */
   public void setType(int type) {
     this.type = type;
@@ -57,10 +56,6 @@ public class MediaItem implements Parcelable {
 
   public void setUriOrigin(Uri uriOrigin) {
     this.uriOrigin = uriOrigin;
-  }
-
-  public boolean isVideo() {
-    return type == VIDEO;
   }
 
   public boolean isPhoto() {

@@ -15,7 +15,7 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name="picker.image.android.com.library.ui.ImagePickerActivity"
+    <activity android:name="picker.image.android.com.library.ui.activity.ImagePickerActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
   </application>
 
