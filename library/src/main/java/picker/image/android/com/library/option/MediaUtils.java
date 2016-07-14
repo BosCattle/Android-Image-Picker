@@ -22,10 +22,6 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * @author TUNGDX
- */
-
-/**
  * Utility for Media Picker module.
  */
 public class MediaUtils {

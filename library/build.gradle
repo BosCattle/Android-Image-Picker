@@ -6,7 +6,7 @@ publish {
   userOrg = 'kevinbas'
   groupId = 'com.kevinbas'
   artifactId = 'android-image-picker'
-  publishVersion = '0.0.2'
+  publishVersion = '0.0.4'
   desc = 'A library for utils.'
   website = 'https://github.com/BosCattle/Android-Image-Picker'
 }
@@ -39,6 +39,7 @@ android {
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
   testCompile 'junit:junit:4.12'
+
   compile 'com.android.support:appcompat-v7:24.0.0'
   compile 'com.android.support:design:24.0.0'
   compile 'com.android.support:recyclerview-v7:24.0.0'
@@ -49,5 +50,5 @@ dependencies {
   compile 'com.github.clans:fab:1.6.4'
   compile 'com.edmodo:cropper:1.0.1'
   compile 'com.github.bumptech.glide:glide:3.7.0'
-
+  compile 'com.android.support:support-v4:24.0.0'
 }
