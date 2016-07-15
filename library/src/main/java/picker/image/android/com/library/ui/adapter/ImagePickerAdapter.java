@@ -106,7 +106,10 @@ public class ImagePickerAdapter extends CursorRecyclerViewAdapter<ImagePickerVie
           }
         }
       });
-      viewHolder.mImageView.setOnTouchListener((view, motionEvent) -> mGestureDetector.onTouchEvent(motionEvent));
+      viewHolder.mImageView.setOnTouchListener((view, motionEvent) -> {
+        mGestureDetector.onTouchEvent(motionEvent);
+        return true;
+      });
     }
   }
 
