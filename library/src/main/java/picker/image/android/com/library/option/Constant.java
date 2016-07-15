@@ -10,4 +10,7 @@ public class Constant {
   public static final String MEDIA_KEY = "media_key";
   public static final String CODE_KEY = "code_key";
   public static final int CONSTANT_REQUEST_CODE = 100;
+  public static final String CONSTANT_IMAGE_LIST = "list";
+  public static final String CONSTANT_IMAGE_POSTION = "list_position";
+  public static final String CONSTANT_IMAGE = "image";
 }
